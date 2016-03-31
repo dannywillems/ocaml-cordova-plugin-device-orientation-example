@@ -1,5 +1,5 @@
 let on_device_ready _ =
-  let c = Compass.compass () in
+  let c = Compass.t () in
   Js._false
 
 let _ =
