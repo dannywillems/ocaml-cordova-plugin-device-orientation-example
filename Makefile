@@ -70,6 +70,7 @@ else
 endif
 
 $(PROD_DIRECTORY)/%: $(DEV_DIRECTORY)/%
+	$(RM) $@
 	cp -r $< $@
 
 ##### Cordova rules
@@ -163,5 +164,8 @@ init_plugins: $(PLUGINS)
 $(PLUGINS):
 	cordova plugin add $@
 
-init_dep: init_plugins
-	# TODO: Initialise the directory with required packages and executables
+init_opam:
+	opam install $(OPAM_PKG)
+
+init: init_dir init_opam init_plugins
+	mkdir -p hooks
